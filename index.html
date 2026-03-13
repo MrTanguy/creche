@@ -77,15 +77,14 @@
 
         function verifier(){
             let valeur = document.getElementById("reponse").value;
-            let validation = document.getElementById("validation");
             let resultat = document.getElementById("resultat");
             let confirmation = document.getElementById("confirmation");
             
             confirmation.innerHTML = "";
+            document.getElementById("validation").style.display = 'none';
 
             if (valeur == "6,89") {
 
-                validation.style.display = 'none';
                 resultat.textContent = "Bonne réponse ! Mais ta crèche est-elle conforme ? ";
                 resultat.style.color = "green";
 
@@ -101,6 +100,7 @@
         }
 
         function gagner(){
+            document.getElementById("validation").style.display = 'none';
             document.getElementById("resultat").textContent = "🎉 Félicitation ! Maintenant va équiper ta porte d'entrée…";
             document.getElementById("confirmation").innerHTML = "";
         }
@@ -109,6 +109,7 @@
             let resultat = document.getElementById("resultat");
 
             document.getElementById("confirmation").innerHTML = "";
+            document.getElementById("validation").style.display = 'inline-block';
 
             resultat.textContent = "❌ Erreur ! Revise ton référentiel Norma...\nMais tu as gagné un stage à la PMI 😊.";
             resultat.style.color = "red";
