@@ -1,55 +1,120 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>Mini Jeu</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 100px;
-    }
+    <head>
+        <meta charset="UTF-8">
+        <title>Creche</title>
+        <style>
 
-    input {
-      padding: 10px;
-      font-size: 16px;
-    }
+            body{
+                margin:0;
+                height:100vh;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                font-family:Arial, sans-serif;
+                background:linear-gradient(135deg,#667eea,#764ba2);
+            }
 
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      margin-left: 10px;
-    }
+            .container{
+                background:white;
+                padding:40px;
+                border-radius:15px;
+                box-shadow:0 10px 30px rgba(0,0,0,0.2);
+                text-align:center;
+                width:320px;
+            }
 
-    #resultat {
-      margin-top: 20px;
-      font-weight: bold;
-      font-size: 20px;
-    }
-  </style>
-</head>
-<body>
+            input{
+                width:100%;
+                padding:12px;
+                font-size:16px;
+                border-radius:8px;
+                border:1px solid #ccc;
+            }
 
-<h1>Entre la bonne réponse</h1>
+            button{
+                margin-top:15px;
+                padding:10px 15px;
+                border:none;
+                border-radius:8px;
+                cursor:pointer;
+                color:white;
+                background:linear-gradient(135deg,#667eea,#764ba2);
+            }
 
-<input type="text" id="reponse" placeholder="Tape ta réponse">
-<button onclick="verifier()">Valider</button>
+            #resultat{
+                margin-top:20px;
+                font-weight:bold;
+            }
 
-<div id="resultat"></div>
+            .confirmation{
+                margin-top:15px;
+            }
 
-<script>
-function verifier() {
-  let valeur = document.getElementById("reponse").value;
+            .confirmation button{
+                margin:5px;
+            }
 
-  if (valeur == "6.89") {
-    document.getElementById("resultat").textContent = "🎉 Bravo, tu as gagné !";
-    document.getElementById("resultat").style.color = "green";
-  } else {
-    document.getElementById("resultat").textContent = "❌ Mauvaise réponse, tu as perdu.";
-    document.getElementById("resultat").style.color = "red";
-  }
-}
-</script>
+        </style>
+    </head>
 
-</body>
+    <body>
+
+    <div class="container">
+
+        <h1>Renseigne le ratio m²/enfant</h1>
+
+        <input type="text" id="reponse" placeholder="Tape ta réponse">
+
+        <button id="validation" onclick="verifier()">Valider</button>
+
+        <div id="resultat"></div>
+        <div id="confirmation"></div>
+
+    </div>
+
+    <script>
+
+        function verifier(){
+            let valeur = document.getElementById("reponse").value;
+            let validation = document.getElementById("validation");
+            let resultat = document.getElementById("resultat");
+            let confirmation = document.getElementById("confirmation");
+            
+            confirmation.innerHTML = "";
+
+            if (valeur == "6,89") {
+
+                validation.style.display = 'none';
+                resultat.textContent = "Bonne réponse ! Mais ta crèche est-elle conforme ? ";
+                resultat.style.color = "green";
+
+                confirmation.innerHTML = `
+                    <div class="confirmation">
+                    <button onclick="gagner()">Oui</button>
+                    <button onclick="perdu()">Non</button>
+                    </div>
+                `;
+            } else {
+                perdu()
+            }
+        }
+
+        function gagner(){
+            document.getElementById("resultat").textContent = "🎉 Félicitation ! Maintenant va équiper ta porte d'entrée…";
+            document.getElementById("confirmation").innerHTML = "";
+        }
+
+        function perdu(){
+            let resultat = document.getElementById("resultat");
+
+            document.getElementById("confirmation").innerHTML = "";
+
+            resultat.textContent = "❌ Erreur ! Revise ton référentiel Norma...\nMais tu as gagné un stage à la PMI 😊.";
+            resultat.style.color = "red";
+        }
+
+        </script>
+
+    </body>
 </html>
